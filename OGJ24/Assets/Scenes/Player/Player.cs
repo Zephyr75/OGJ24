@@ -12,7 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody body;
     private PlayerInputs inputs;
     private InputAction moveAction;
+    private InputAction dashAction;
     private Vector3 inp;
+    private bool dashInput;
+    private float cooldownTime = 2f;
+    private float distanceDash = 15f;
+    private float lastUsedTime;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -27,6 +32,8 @@ public class Player : MonoBehaviour
     {
         moveAction = inputs.Player.Move;
         moveAction.Enable();
+        dashAction = inputs.Player.Dash;
+        dashAction.Enable();
         /*lookAction = inputs.Player.Look;
         lookAction.Enable();*/
     }
@@ -34,6 +41,7 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         moveAction.Disable();
+        dashAction.Disable();
         //lookAction.Disable();
     }
 
@@ -42,6 +50,11 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Look();
+        if (dashInput && Time.time > lastUsedTime + cooldownTime)
+        {
+            body.AddForce(transform.forward*distanceDash, ForceMode.Impulse);
+            lastUsedTime = Time.time;
+        }
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
         float horizontalInput = moveDir.x;
 
@@ -61,6 +74,9 @@ public class Player : MonoBehaviour
 
         float verticalInput = moveDir.y;
         inp = new Vector3(horizontalInput, 0, verticalInput);
+
+        dashInput = dashAction.WasPressedThisFrame();
+
     }
 
     private void Look()
