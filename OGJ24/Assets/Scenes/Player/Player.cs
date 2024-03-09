@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speedMove = 10.0f;
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] private Rigidbody body;
+    [SerializeField] private Animator anim;
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
         {
             body.AddForce(transform.forward*distanceDash, ForceMode.Impulse);
             lastUsedTime = Time.time;
+            anim.SetTrigger("Dash");
         }
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
         float horizontalInput = moveDir.x;
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        anim.SetFloat("Speed", inp.magnitude);
         body.MovePosition(transform.position + (transform.forward * inp.magnitude) * speedMove * Time.deltaTime);
     }
 }
