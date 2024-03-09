@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Echap",
+                    "type": "Button",
+                    "id": "8df3039e-a11c-462a-b095-dabcff4ddf0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -251,6 +260,50 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0d93234-4c90-4252-83c6-034feeac6627",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Echap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a1a36a0-7f73-49c1-8938-638a8dc6e485",
+                    "path": "<DualShockGamepad>/start",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Echap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf596807-6650-4269-9aa6-7bfbabfd3465",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Echap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6da0db85-f7c8-4e2f-8393-9753f1b0a6f4",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Echap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
