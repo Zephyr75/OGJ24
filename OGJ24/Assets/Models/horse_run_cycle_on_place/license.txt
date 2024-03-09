@@ -1,0 +1,11 @@
+Model Information:
+* title:	Horse Run Cycle On Place
+* source:	https://sketchfab.com/3d-models/horse-run-cycle-on-place-8451f03cb1564436bfaa3964dd619a86
+* author:	Amitesh Nandan (https://sketchfab.com/creatureanimator)
+
+Model License:
+* license type:	CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)
+* requirements:	Author must be credited. Modified versions can not be distributed. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Horse Run Cycle On Place" (https://sketchfab.com/3d-models/horse-run-cycle-on-place-8451f03cb1564436bfaa3964dd619a86) by Amitesh Nandan (https://sketchfab.com/creatureanimator) licensed under CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)
