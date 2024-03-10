@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -70,9 +71,14 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void Quit()
+    public void Restart()
     {
-        Application.Quit();
+        SceneManager.LoadScene("test");
+    }
+
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
     
     public void ChangeMusicVolume()
