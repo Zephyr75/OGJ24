@@ -38,10 +38,10 @@ public class Nazgul : Ennemies
         spin.SetActive(true);
         massue.SetActive(false);
         float time = 0;
-        while (time < 0.5f)
+        while (time < 0.25f)
         {
             time += Time.deltaTime;
-            spin.transform.Rotate(0, 720 * Time.deltaTime, 0);
+            spin.transform.Rotate(0, -1440 * Time.deltaTime, 0);
             yield return null;
         }
         spin.SetActive(false);

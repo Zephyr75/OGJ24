@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI fruitsText;
     private int fruitsCount;
+    private float loopCountdown = 8 * 60;
     
     
     // Start is called before the first frame update
@@ -19,6 +20,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        loopCountdown -= Time.deltaTime;
+        if (loopCountdown <= 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("terrain");
+        }
         
     }
     
@@ -26,5 +32,10 @@ public class GameManager : MonoBehaviour
     {
         fruitsCount++;
         fruitsText.text = "Fruits: " + fruitsCount;
+    }
+    
+    public int GetFruitCount()
+    {
+        return fruitsCount;
     }
 }

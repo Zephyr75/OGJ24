@@ -30,9 +30,11 @@ public class Player : MonoBehaviour
     private bool attackInput;
     private bool horseInput;
     private float cooldownTime = 2f;
+    private float cooldownAttackTime = 1f;
     private float hitTime;
     private float distanceDash = 15f;
     private float lastUsedTime;
+    private float lastUsedAttackTime;
     private bool isRiding = false;
     private bool isInvincible = false;
     private bool isFrozen = false;
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
             
         }
         
-        if (attackInput)
+        if (attackInput && Time.time > lastUsedAttackTime + cooldownAttackTime)
         {
             Debug.Log("Attack");
             anim.SetTrigger("Attack");
@@ -117,6 +119,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Spin());
             }
+            lastUsedAttackTime = Time.time;
         }
         
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
@@ -138,10 +141,10 @@ public class Player : MonoBehaviour
         spin.SetActive(true);
         sword.SetActive(false);
         float time = 0;
-        while (time < 0.5f)
+        while (time < 0.25f)
         {
             time += Time.deltaTime;
-            spin.transform.Rotate(0, 720 * Time.deltaTime, 0);
+            spin.transform.Rotate(0, -1440 * Time.deltaTime, 0);
             yield return null;
         }
         spin.SetActive(false);
