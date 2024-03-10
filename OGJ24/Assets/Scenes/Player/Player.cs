@@ -164,9 +164,12 @@ public class Player : MonoBehaviour
                        time += Time.deltaTime;
                        cake.transform.position += new Vector3(0, 3f * Time.deltaTime, 0);
                        // grow fruit
-                       cake.transform.localScale += new Vector3(0.4f * Time.deltaTime, 0.4f * Time.deltaTime, 0.4f * Time.deltaTime);
+                       cake.transform.localScale += new Vector3(0.1f * Time.deltaTime, 0.1f * Time.deltaTime, 0.1f * Time.deltaTime);
                        yield return null;
                    }
+
+                   yield return new WaitForSeconds(1f);
+                   Destroy(cake);
                    gm.GetComponent<GameManager>().StartEnding();
     }
     

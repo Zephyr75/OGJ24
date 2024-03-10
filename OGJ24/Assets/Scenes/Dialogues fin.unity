@@ -180,8 +180,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Tu m'en vois ravi! Mais je me fiche bien de cela! D\xE9p\xE8che toi d'aller
-    en cuisine et de me pr\xE9parer mon g\xE2teau avant que ce soit toi que je cuisine"
+  m_text: "Tu m'en vois ravi! Je te remercie et ne t'inqui\xE8tes pas en ce qui concerne
+    la destruction de ta maison, je m'en suis d\xE9j\xE0 charg\xE9."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -315,9 +315,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Oui seigneur Doumalt! Tout est la, je dois bien avouer que j'ai eu chaud!
-    Ces alliments frais sont d'une qualit\xE9 excellente pour pr\xE9parer votre for\xEAt
-    noire et apaiser votre col\xE8re! "
+  m_text: "Oui seigneur Doumalt! D'ailleurs j'ai d\xE9j\xE0 utilis\xE9 les deux fours
+    pour cuire votre d\xE9licieux g\xE2teau. J'esp\xE8re qu'il sera \xE0 votre go\xFBt."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
