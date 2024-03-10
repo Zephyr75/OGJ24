@@ -7,6 +7,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private Transform couvercle;
     [SerializeField] private Transform fruit;
     public bool open;
+    public bool done;
     private GameObject gm;
     // Start is called before the first frame update
     void Start()
@@ -23,13 +24,14 @@ public class Chest : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
         {
-           if (other.tag.Equals("Player") && open)
+           if (other.tag.Equals("Player") && open && !done)
            {
                other.GetComponent<Player>().OpenChest();
                other.transform.position = transform.position + new Vector3(0, 0, 1);
                other.transform.rotation = transform.rotation;
                StartCoroutine(OpenCouvercle());
                open = false;
+               done = true;
                gm.GetComponent<GameManager>().AddFruit();
            }
         }
