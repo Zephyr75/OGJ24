@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8795671930230462064}
   - component: {fileID: 8679653931532063741}
   - component: {fileID: 4966107661285905888}
+  - component: {fileID: 7340476711923457116}
+  - component: {fileID: 5099603296898655480}
   m_Layer: 0
   m_Name: Massue
   m_TagString: Untagged
@@ -83,6 +85,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7340476711923457116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126797899302055484}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 29.990416, y: 5.108882, z: 5.1088824}
+  m_Center: {x: -13.318545, y: -0.00000035762787, z: -0.016912699}
+--- !u!114 &5099603296898655480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126797899302055484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f5164dd7607b7489cdb048d99d5ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
 --- !u!1 &2154695274538589426
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +303,7 @@ GameObject:
   - component: {fileID: 5994795253033540507}
   m_Layer: 0
   m_Name: nazgul
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,8 +393,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 5.365961, z: 3.2935104}
+  m_Center: {x: 0, y: 2.1829805, z: -0.17961311}
 --- !u!54 &2920777398021590228
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -420,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c34eba2a008334aab58c4214340621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 6
   anim: {fileID: 8246731492638951623}
   spin: {fileID: 2154695274538589426}
   massue: {fileID: 2374347088907482490}

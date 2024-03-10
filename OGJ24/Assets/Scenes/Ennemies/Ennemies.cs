@@ -9,6 +9,8 @@ public class Ennemies : MonoBehaviour
     // Start is called before the first frame update
     protected NavMeshAgent ennemy;
     protected GameObject player;
+    [SerializeField] private int hp;
+
 
     protected void Start()
     {
@@ -29,4 +31,14 @@ public class Ennemies : MonoBehaviour
             ennemy.destination = player.transform.position;
         }
     }
+    
+    public void TakeDamage(int value)
+    {
+        hp -= value;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
 }

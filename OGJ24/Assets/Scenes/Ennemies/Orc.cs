@@ -19,7 +19,6 @@ public class Orc : Ennemies
     void Update()
     {
         base.Update();
-        Debug.Log(ennemy.velocity.magnitude);
 
         anim.SetFloat("Speed", ennemy.velocity.magnitude);
         
