@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -19,16 +20,19 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject horsePrefab;
     [SerializeField] private GameObject spin;
     [SerializeField] private GameObject sword;
+    [SerializeField] private GameObject cake;
     [SerializeField] private TextMeshProUGUI hpText;
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
     private InputAction attackAction;
     private InputAction horseAction;
+    private InputAction cookAction;
     private Vector3 inp;
     private bool dashInput;
     private bool attackInput;
     private bool horseInput;
+    private bool cookInput;
     private float cooldownTime = 2f;
     private float cooldownAttackTime = 1f;
     private float hitTime;
@@ -38,14 +42,19 @@ public class Player : MonoBehaviour
     private bool isRiding = false;
     private bool isInvincible = false;
     private bool isFrozen = false;
+    public bool cooked = false;
+    public bool canCook = false;
     public bool isAttacking = false;
     public GameObject horseAvailable = null;
     private int hp = 10;
+    private GameObject gm;
     
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         hpText.text = "HP: " + hp;
+        
+        gm = GameObject.Find("GameManager");
     }
     
     void Awake()
@@ -60,9 +69,11 @@ public class Player : MonoBehaviour
         dashAction = inputs.Player.Dash;
         attackAction = inputs.Player.Attack;
         horseAction = inputs.Player.Horse;
+        cookAction = inputs.Player.Cooking;
         dashAction.Enable();
         attackAction.Enable();
         horseAction.Enable();
+        cookAction.Enable();
         /*lookAction = inputs.Player.Look;
         lookAction.Enable();*/
     }
@@ -73,6 +84,7 @@ public class Player : MonoBehaviour
         dashAction.Disable();
         attackAction.Disable();
         horseAction.Disable();
+        cookAction.Disable();
         //lookAction.Disable();
     }
 
@@ -130,11 +142,32 @@ public class Player : MonoBehaviour
             lastUsedAttackTime = Time.time;
         }
         
+        if (cookInput && canCook && !cooked && gm.GetComponent<GameManager>().GetFruitCount() >= 4)
+        {
+            StartCoroutine(Cook());
+            cooked = true;
+        }
+        
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
         float horizontalInput = moveDir.x;
 
         float verticalInput = moveDir.y;
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * speedMove * Time.deltaTime);*/
+    }
+
+    IEnumerator Cook()
+    {
+       cake.SetActive(true);
+           float time = 0;
+                   while (time < 1)
+                   {
+                       time += Time.deltaTime;
+                       cake.transform.position += new Vector3(0, 3f * Time.deltaTime, 0);
+                       // grow fruit
+                       cake.transform.localScale += new Vector3(0.4f * Time.deltaTime, 0.4f * Time.deltaTime, 0.4f * Time.deltaTime);
+                       yield return null;
+                   }
+                   gm.GetComponent<GameManager>().StartEnding();
     }
     
     IEnumerator Invincible()
@@ -182,6 +215,7 @@ public class Player : MonoBehaviour
         dashInput = dashAction.WasPressedThisFrame();
         attackInput = attackAction.WasPressedThisFrame();
         horseInput = horseAction.WasPressedThisFrame();
+        cookInput = cookAction.WasPressedThisFrame();
 
     }
 

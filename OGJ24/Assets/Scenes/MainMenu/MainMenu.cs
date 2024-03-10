@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene("Dialogues");
     }
 
     public void Quit()

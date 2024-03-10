@@ -29,6 +29,7 @@ public class Cook : MonoBehaviour
         if (other.gameObject.tag.Equals("Player") && gm.GetComponent<GameManager>().GetFruitCount() >= 4)
         {
             cookText.SetActive(true);
+            other.GetComponent<Player>().canCook = true;
         }
     }
     
@@ -37,6 +38,7 @@ public class Cook : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             cookText.SetActive(false);
+            other.GetComponent<Player>().canCook = false;
         }
     }
 }

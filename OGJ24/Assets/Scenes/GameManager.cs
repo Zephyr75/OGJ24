@@ -44,4 +44,9 @@ public class GameManager : MonoBehaviour
     {
         return fruitsCount;
     }
+
+    public void StartEnding()
+    {
+        fruitsText.text = "Empressez-vous d'amener la forêt noire à Sauron au château!";
+    }
 }
