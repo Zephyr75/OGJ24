@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float speedMove = 10.0f;
+    [SerializeField] private float speedMove = 20.0f;
     [SerializeField] private float turnSpeed = 720f;
     [SerializeField] private Rigidbody body;
     [SerializeField] private Animator anim;
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
                 return;
             }
             isRiding = !isRiding;
-            speedMove = isRiding ? 20f : 10f;
+            speedMove = isRiding ? 40f : 20f;
             horseModel.SetActive(isRiding);
             playerModel.SetActive(!isRiding);
             if (!isRiding)
