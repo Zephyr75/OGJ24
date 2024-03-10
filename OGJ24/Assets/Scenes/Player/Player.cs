@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject horseUI;
     [SerializeField] private GameObject horsePrefab;
+    [SerializeField] private GameObject spin;
+    [SerializeField] private GameObject sword;
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
@@ -103,6 +105,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Attack");
             anim.SetTrigger("Attack");
+            if (isRiding)
+            {
+                StartCoroutine(Spin());
+            }
         }
         
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
@@ -110,6 +116,21 @@ public class Player : MonoBehaviour
 
         float verticalInput = moveDir.y;
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * speedMove * Time.deltaTime);*/
+    }
+    
+    IEnumerator Spin()
+    {
+        spin.SetActive(true);
+        sword.SetActive(false);
+        float time = 0;
+        while (time < 0.5f)
+        {
+            time += Time.deltaTime;
+            spin.transform.Rotate(0, 720 * Time.deltaTime, 0);
+            yield return null;
+        }
+        spin.SetActive(false);
+        sword.SetActive(true);
     }
 
     private void FixedUpdate()

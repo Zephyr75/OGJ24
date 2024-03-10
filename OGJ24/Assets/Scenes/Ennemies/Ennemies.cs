@@ -7,17 +7,26 @@ using UnityEngine.AI;
 public class Ennemies : MonoBehaviour
 {
     // Start is called before the first frame update
-    private NavMeshAgent ennemy;
-    [SerializeField] private GameObject player;
+    protected NavMeshAgent ennemy;
+    protected GameObject player;
 
-    private void Start()
+    protected void Start()
     {
         ennemy = GetComponent<NavMeshAgent>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        ennemy.destination = player.transform.position;
+
+        if (Vector3.Distance(player.transform.position, transform.position) < 2)
+        {
+            ennemy.destination = ennemy.transform.position;
+        }
+        else
+        {
+            ennemy.destination = player.transform.position;
+        }
     }
 }
