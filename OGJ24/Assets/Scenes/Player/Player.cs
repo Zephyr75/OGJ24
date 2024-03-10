@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private float speedMove = 10.0f;
-    [SerializeField] private float turnSpeed = 360f;
+    [SerializeField] private float turnSpeed = 720f;
     [SerializeField] private Rigidbody body;
     [SerializeField] private Animator anim;
     [SerializeField] private Animator horseAnim;
@@ -16,6 +17,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject playerModel;
     [SerializeField] private GameObject horseUI;
     [SerializeField] private GameObject horsePrefab;
+    [SerializeField] private GameObject spin;
+    [SerializeField] private GameObject sword;
+    [SerializeField] private TextMeshProUGUI hpText;
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
@@ -26,14 +30,18 @@ public class Player : MonoBehaviour
     private bool attackInput;
     private bool horseInput;
     private float cooldownTime = 2f;
+    private float hitTime;
     private float distanceDash = 15f;
     private float lastUsedTime;
     private bool isRiding = false;
+    private bool isInvincible = false;
     public GameObject horseAvailable = null;
+    private int hp = 10;
     
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        hpText.text = "HP: " + hp;
     }
     
     void Awake()
@@ -74,6 +82,7 @@ public class Player : MonoBehaviour
             body.AddForce(transform.forward*distanceDash, ForceMode.Impulse);
             lastUsedTime = Time.time;
             anim.SetTrigger("Dash");
+            StartCoroutine(Invincible());
         }
 
         horseUI.SetActive(horseAvailable != null);
@@ -103,6 +112,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Attack");
             anim.SetTrigger("Attack");
+            if (isRiding)
+            {
+                StartCoroutine(Spin());
+            }
         }
         
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
@@ -110,6 +123,28 @@ public class Player : MonoBehaviour
 
         float verticalInput = moveDir.y;
         transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * speedMove * Time.deltaTime);*/
+    }
+    
+    IEnumerator Invincible()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(1);
+        isInvincible = false;
+    }
+    
+    IEnumerator Spin()
+    {
+        spin.SetActive(true);
+        sword.SetActive(false);
+        float time = 0;
+        while (time < 0.5f)
+        {
+            time += Time.deltaTime;
+            spin.transform.Rotate(0, 720 * Time.deltaTime, 0);
+            yield return null;
+        }
+        spin.SetActive(false);
+        sword.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -146,5 +181,20 @@ public class Player : MonoBehaviour
         anim.SetFloat("Speed", inp.magnitude);
         horseAnim.SetFloat("Speed", inp.magnitude);
         body.MovePosition(transform.position + (transform.forward * inp.magnitude) * speedMove * Time.deltaTime);
+    }
+    
+    public void TakeDamage(int value)
+    {
+        if (Time.time < hitTime + 1 || isInvincible)
+        {
+            return;
+        }
+        hp -= value;
+        hitTime = Time.time;
+        hpText.text = "HP: " + hp;
+        if (hp <= 0)
+        {
+            // TODO: restart level
+        }
     }
 }
