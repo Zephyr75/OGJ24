@@ -7,7 +7,7 @@ using UnityEngine;
 public class GroupEnemies : MonoBehaviour
 {
     public List<Ennemies> _ennemiesList;
-    //TODO put Serializable chest
+    [SerializeField] private GameObject chest;
 
     private int count;
     // Start is called before the first frame update
@@ -22,7 +22,8 @@ public class GroupEnemies : MonoBehaviour
         count = countEnemies();
         if (count == 0)
         {
-            //TODO open the chest
+            chest.GetComponent<Chest>().open = true;
+            count = -1;
         }
     }
 

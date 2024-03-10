@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private float lastUsedTime;
     private bool isRiding = false;
     private bool isInvincible = false;
+    private bool isFrozen = false;
     public GameObject horseAvailable = null;
     private int hp = 10;
     
@@ -168,7 +169,7 @@ public class Player : MonoBehaviour
 
     private void Look()
     {
-        if (inp != Vector3.zero)
+        if (inp != Vector3.zero && !isFrozen)
         {
             var relative = (transform.position + inp.ToIso()) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
@@ -195,6 +196,23 @@ public class Player : MonoBehaviour
         if (hp <= 0)
         {
             // TODO: restart level
+            // reload scene
+            UnityEngine.SceneManagement.SceneManager.LoadScene("terrain");
         }
+    }
+    
+    public void OpenChest()
+    {
+        anim.SetTrigger("Chest");
+        StartCoroutine(Freeze());
+    }   
+    
+    IEnumerator Freeze()
+    {
+        speedMove = 0;
+        isFrozen = true; 
+        yield return new WaitForSeconds(2);
+        isFrozen = false;
+        speedMove = 10;
     }
 }
