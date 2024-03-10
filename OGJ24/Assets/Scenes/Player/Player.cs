@@ -19,9 +19,11 @@ public class Player : MonoBehaviour
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
+    private InputAction attackAction;
     private InputAction horseAction;
     private Vector3 inp;
     private bool dashInput;
+    private bool attackInput;
     private bool horseInput;
     private float cooldownTime = 2f;
     private float distanceDash = 15f;
@@ -44,8 +46,10 @@ public class Player : MonoBehaviour
         moveAction = inputs.Player.Move;
         moveAction.Enable();
         dashAction = inputs.Player.Dash;
+        attackAction = inputs.Player.Attack;
         horseAction = inputs.Player.Horse;
         dashAction.Enable();
+        attackAction.Enable();
         horseAction.Enable();
         /*lookAction = inputs.Player.Look;
         lookAction.Enable();*/
@@ -55,6 +59,7 @@ public class Player : MonoBehaviour
     {
         moveAction.Disable();
         dashAction.Disable();
+        attackAction.Disable();
         horseAction.Disable();
         //lookAction.Disable();
     }
@@ -93,6 +98,13 @@ public class Player : MonoBehaviour
             }
             
         }
+        
+        if (attackInput)
+        {
+            Debug.Log("Attack");
+            anim.SetTrigger("Attack");
+        }
+        
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
         float horizontalInput = moveDir.x;
 
@@ -114,6 +126,7 @@ public class Player : MonoBehaviour
         inp = new Vector3(horizontalInput, 0, verticalInput);
 
         dashInput = dashAction.WasPressedThisFrame();
+        attackInput = attackAction.WasPressedThisFrame();
         horseInput = horseAction.WasPressedThisFrame();
 
     }
