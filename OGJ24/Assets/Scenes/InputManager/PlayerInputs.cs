@@ -71,6 +71,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Horse"",
+                    ""type"": ""Button"",
+                    ""id"": ""93fd3724-4168-494d-8c23-e5ec4152de88"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -379,6 +388,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6cdfe77-362d-49be-ac82-713ee2c4b2f0"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e56df8e-61c7-49e7-bba6-c8cc8e157b33"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -971,6 +1002,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Echap = m_Player.FindAction("Echap", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Horse = m_Player.FindAction("Horse", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1049,6 +1081,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Echap;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Horse;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1058,6 +1091,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Echap => m_Wrapper.m_Player_Echap;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Horse => m_Wrapper.m_Player_Horse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1082,6 +1116,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Horse.started += instance.OnHorse;
+            @Horse.performed += instance.OnHorse;
+            @Horse.canceled += instance.OnHorse;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1101,6 +1138,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Horse.started -= instance.OnHorse;
+            @Horse.performed -= instance.OnHorse;
+            @Horse.canceled -= instance.OnHorse;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1288,6 +1328,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnEchap(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnHorse(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

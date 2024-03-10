@@ -11,14 +11,24 @@ public class Player : MonoBehaviour
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] private Rigidbody body;
     [SerializeField] private Animator anim;
+    [SerializeField] private Animator horseAnim;
+    [SerializeField] private GameObject horseModel;
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private GameObject horseUI;
+    [SerializeField] private GameObject horsePrefab;
     private PlayerInputs inputs;
     private InputAction moveAction;
     private InputAction dashAction;
+    private InputAction horseAction;
     private Vector3 inp;
     private bool dashInput;
+    private bool horseInput;
     private float cooldownTime = 2f;
     private float distanceDash = 15f;
     private float lastUsedTime;
+    private bool isRiding = false;
+    public GameObject horseAvailable = null;
+    
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,7 +44,9 @@ public class Player : MonoBehaviour
         moveAction = inputs.Player.Move;
         moveAction.Enable();
         dashAction = inputs.Player.Dash;
+        horseAction = inputs.Player.Horse;
         dashAction.Enable();
+        horseAction.Enable();
         /*lookAction = inputs.Player.Look;
         lookAction.Enable();*/
     }
@@ -43,6 +55,7 @@ public class Player : MonoBehaviour
     {
         moveAction.Disable();
         dashAction.Disable();
+        horseAction.Disable();
         //lookAction.Disable();
     }
 
@@ -51,11 +64,34 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Look();
-        if (dashInput && Time.time > lastUsedTime + cooldownTime)
+        if (dashInput && Time.time > lastUsedTime + cooldownTime && !isRiding)
         {
             body.AddForce(transform.forward*distanceDash, ForceMode.Impulse);
             lastUsedTime = Time.time;
             anim.SetTrigger("Dash");
+        }
+
+        horseUI.SetActive(horseAvailable != null);
+        
+        if (horseInput)
+        {
+            if (!isRiding && horseAvailable == null)
+            {
+                return;
+            }
+            isRiding = !isRiding;
+            speedMove = isRiding ? 20f : 10f;
+            horseModel.SetActive(isRiding);
+            playerModel.SetActive(!isRiding);
+            if (!isRiding)
+            {
+                Instantiate(horsePrefab, transform.position + new Vector3(2, -0.5f ,0), Quaternion.identity);
+            }
+            else
+            {
+                Destroy(horseAvailable);
+            }
+            
         }
         /*Vector2 moveDir = moveAction.ReadValue<Vector2>();
         float horizontalInput = moveDir.x;
@@ -78,6 +114,7 @@ public class Player : MonoBehaviour
         inp = new Vector3(horizontalInput, 0, verticalInput);
 
         dashInput = dashAction.WasPressedThisFrame();
+        horseInput = horseAction.WasPressedThisFrame();
 
     }
 
@@ -94,6 +131,7 @@ public class Player : MonoBehaviour
     private void Move()
     {
         anim.SetFloat("Speed", inp.magnitude);
+        horseAnim.SetFloat("Speed", inp.magnitude);
         body.MovePosition(transform.position + (transform.forward * inp.magnitude) * speedMove * Time.deltaTime);
     }
 }
