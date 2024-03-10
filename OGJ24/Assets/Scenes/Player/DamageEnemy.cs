@@ -6,10 +6,13 @@ using UnityEngine;
 public class DamageEnemy : MonoBehaviour
 {
     [SerializeField] private int damage;
+
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Player");
+
     }
 
     // Update is called once per frame
@@ -20,7 +23,7 @@ public class DamageEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.tag.Equals("Enemy"))
+       if (other.tag.Equals("Enemy") && player.GetComponent<Player>().isAttacking)
        {
            other.GetComponent<Ennemies>().TakeDamage(damage);
        }

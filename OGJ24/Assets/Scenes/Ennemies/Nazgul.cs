@@ -28,6 +28,7 @@ public class Nazgul : Ennemies
         if (Vector3.Distance(player.transform.position, transform.position) < 2 && Time.time > lastUsedTime + cooldownTime)
         {
             StartCoroutine(Spin());
+            StartCoroutine(Attack());
             lastUsedTime = Time.time;
         }
 

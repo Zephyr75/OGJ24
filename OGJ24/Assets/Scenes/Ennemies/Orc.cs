@@ -25,9 +25,14 @@ public class Orc : Ennemies
         if (Vector3.Distance(player.transform.position, transform.position) < 2 && Time.time > lastUsedTime + cooldownTime)
         {
             anim.SetTrigger("Attack");
+            StartCoroutine(Attack());
             lastUsedTime = Time.time;
         }
 
     }
+    
+    
+    
+
 
 }

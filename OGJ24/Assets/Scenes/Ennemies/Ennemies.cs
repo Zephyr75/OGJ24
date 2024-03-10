@@ -10,6 +10,8 @@ public class Ennemies : MonoBehaviour
     protected NavMeshAgent ennemy;
     protected GameObject player;
     [SerializeField] private int hp;
+    
+    public bool isAttacking = false;
 
 
     protected void Start()
@@ -40,5 +42,12 @@ public class Ennemies : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    protected IEnumerator Attack()
+            {
+                isAttacking = true;
+                yield return new WaitForSeconds(1);
+                isAttacking = false;
+            }
     
 }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       fruitsText.text = "Fruits: 0";
+       fruitsText.text = "Ingrédients: " + fruitsCount + "/4";
     }
 
     // Update is called once per frame
@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour
     public void AddFruit()
     {
         fruitsCount++;
-        fruitsText.text = "Fruits: " + fruitsCount;
+        fruitsText.text = "Ingrédients: " + fruitsCount + "/4";
+        if (fruitsCount == 4)
+        {
+            fruitsText.text = "Paré à cuisinier, vous trouverez le nécessaire sur votre route.";
+        }
     }
     
     public int GetFruitCount()

@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     private bool isRiding = false;
     private bool isInvincible = false;
     private bool isFrozen = false;
+    public bool isAttacking = false;
     public GameObject horseAvailable = null;
     private int hp = 10;
     
@@ -78,6 +79,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+        
         GetInput();
         Look();
         if (dashInput && Time.time > lastUsedTime + cooldownTime && !isRiding)
@@ -115,6 +122,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Attack");
             anim.SetTrigger("Attack");
+            StartCoroutine(Attack());
             if (isRiding)
             {
                 StartCoroutine(Spin());
@@ -149,6 +157,13 @@ public class Player : MonoBehaviour
         }
         spin.SetActive(false);
         sword.SetActive(true);
+    }
+    
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(1);
+        isAttacking = false;
     }
 
     private void FixedUpdate()
