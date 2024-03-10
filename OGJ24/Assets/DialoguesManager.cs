@@ -25,7 +25,7 @@ public class DialoguesManager : MonoBehaviour
         foreach (var panel in panels)
         {
             panel.SetActive(true);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(7);
             panel.SetActive(false);
         }
     }
