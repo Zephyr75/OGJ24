@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     
     [SerializeField] private TextMeshProUGUI fruitsText;
+    [SerializeField] private TextMeshProUGUI timerText;
     private int fruitsCount;
     private float loopCountdown = 8 * 60;
     
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         loopCountdown -= Time.deltaTime;
+        timerText.text = "Temps restant: " + (int)loopCountdown + "s";
         if (loopCountdown <= 0)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("terrain");

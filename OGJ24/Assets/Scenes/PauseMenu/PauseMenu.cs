@@ -73,7 +73,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("test");
+        SceneManager.LoadScene("terrain");
     }
 
     public void ReturnMainMenu()

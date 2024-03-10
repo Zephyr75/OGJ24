@@ -27,7 +27,7 @@ public class Chest : MonoBehaviour
            if (other.tag.Equals("Player") && open && !done)
            {
                other.GetComponent<Player>().OpenChest();
-               other.transform.position = transform.position + new Vector3(0, 0, 1);
+               other.transform.position = transform.position + transform.up;
                other.transform.rotation = transform.rotation;
                StartCoroutine(OpenCouvercle());
                open = false;
